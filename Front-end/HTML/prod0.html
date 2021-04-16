@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../JS/script.js" type="text/javascript" defer></script>
-    <link rel="stylesheet" type="text/css" href="./CSS/style.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/style.css">
     <!-- <link rel="icon" href="favicon.ico" /> -->
 
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Roboto&display=swap" rel="stylesheet">
+    
     <script src="https://kit.fontawesome.com/d4c8c8f50d.js" crossorigin="anonymous"></script>
 
     <title>Orinoco</title>
@@ -27,14 +27,16 @@
             </div>
             <div class="flex w-6/12 lg:w-2/12 justify-around items-center">
                 <div>
-                    <a href="../index.html" class="flex flex-col justify-center items-center cursor-pointer">
-                        <i class="fas fa-home text-red-600 text-3xl lg:text-2xl"></i>
+                    <a href="../index.html" class="flex flex-col justify-center items-center cursor-pointer hover:text-red-600">
+                        <i class="fas fa-home text-3xl lg:text-2xl"></i>
                         <p>Accueil</p>
                     </a>
                 </div>
-                <div class="flex flex-col justify-center items-center cursor-pointer">
-                    <i class="fas fa-shopping-basket text-red-600 text-3xl lg:text-2xl"></i>
-                    <p>Panier</p>
+                <div class="flex flex-col justify-center items-center cursor-pointer hover:text-red-600">
+                    <a href="#" class="flex flex-col justify-center items-center cursor-pointer hover:text-red-600">
+                        <i class="fas fa-shopping-basket text-3xl lg:text-2xl"></i>
+                        <p>Panier</p>
+                    </a>
                 </div>
             </div>
         </div>
@@ -44,12 +46,17 @@
         <div class="w-full">
             <div class="flex flex-col md:flex-row w-full md:h-60 my-8 carte">
                 <div class="lg:w-6/12 w-full h-80 md:h-auto xl:w-4/12 cursor-pointer">
-                    <img id="photo_zurss" class="h-full w-full">
+                    <img id="photo_p0" class="h-full w-full">
                 </div>
                 <div class="flex flex-col w-full lg:w-6/12 xl:w-8/12 relative h-60 bg-white">
-                    <p id="nom_zurss" class="p-2 m-2"></p>
-                    <p id="description_zurss" class="p-2 m-2"></p>
-                    <p id="prix_zurss" class="absolute bottom-1 left-1 p-2 m-4 rounded"></p>
+                    <p id="nom_p0" class="p-2 m-2"></p>
+                    <p id="description_p0" class="p-2 m-2"></p>
+                    <p id="prix_p0" class="absolute bottom-1 left-1 p-1 m-3 rounded"></p>
+                    <select name="length" id="length" class="md:w-5/12 p-2 m-2 border border-2 w-full">
+                        <option value="">Choississez votre lentille</option>
+                        <option id="length1" value=""></option>
+                        <option id="length2" value=""></option>
+                    </select>
                 </div>
             </div>
             

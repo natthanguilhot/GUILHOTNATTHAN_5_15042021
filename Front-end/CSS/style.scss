@@ -3,10 +3,13 @@
     padding: 0;
     box-sizing: border-box;
 }
+body {
+    font-family: Roboto ,Arial, Helvetica, sans-serif;
+}
 h1 {
     font-family: "Caveat";
 }
-section#bg-hb {
+#bg-hb {
     background-image: url(../img/photography-2751464_640.jpg);
     background-repeat: repeat-x;
     @media (min-width: 1024px) {

@@ -1,19 +1,12 @@
-let photoZurss = document.querySelector('#photo_zurss');
-fetch('http://localhost:3000/api/cameras')
-.then(response => response.json()
-.then(response => photoZurss.setAttribute('src',response[0].imageUrl)));
+// Produit 0
+let photoP0 = document.querySelector('#photo_p0');
+let nomP0 = document.querySelector('#nom_p0');
 
-let nomZurss = document.querySelector('#nom_zurss');
 fetch('http://localhost:3000/api/cameras')
 .then(response => response.json()
-.then(response => nomZurss.innerHTML = response[0].name));
-
-let descriptionZurss = document.querySelector('#description_zurss');
-fetch('http://localhost:3000/api/cameras')
-.then(response => response.json()
-.then(response => descriptionZurss.innerHTML = response[0].description));
-
-let prixZurss = document.querySelector('#prix_zurss');
-fetch('http://localhost:3000/api/cameras')
-.then(response => response.json()
-.then(response => prixZurss.innerHTML = response[0].price));
+.then(products => {
+    for(let product of products) {
+        console.log(product)
+        // pour chaque produit, recuperer les infos et les cloner la div carte en enelevant id,  etc...
+    }
+}));
