@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="JS/script.js" defer></script>
+    <script src="JS/index.js" defer></script>
     <link rel="stylesheet" type="text/css" href="./CSS/style.css">
     <!-- <link rel="icon" href="favicon.ico" /> -->
 
@@ -22,20 +22,20 @@
         <div class="flex flex-col lg:flex-row m-auto w-full lg:w-10/12 xl:w-8/12 justify-between items-center max-w-screen-xl lg:h-20">
             <h1 class="text-6xl cursor-pointer w-auto flex justify-center items-center"><a href="#">Orinoco</a></h1>
             <div class="flex justify-content items-center w-8/12 h-12 lg:w-7/12">
-                <input type="search" class="h-4/6 m-auto w-full rounded-xl focus:bg-red-50 text-black pl-2 text-xl transition-colors">
-                <i class="fas fa-search cursor-pointer pl-2"></i>
+                <input type="search" class="h-4/6 m-auto w-full rounded-xl focus:bg-black text-black focus:text-white pl-2 text-xl transition-colors">
+                <button><i class="fas fa-search cursor-pointer pl-2"></i></button>
             </div>
             <div class="flex w-6/12 lg:w-2/12 justify-around items-center">
-                <div class="flex flex-col justify-center items-center cursor-pointer hover:text-red-600">
+                <button class="flex flex-col justify-center items-center cursor-pointer hover:text-red-600">
                     <i class="fas fa-home text-3xl lg:text-2xl"></i>
                     <p>Accueil</p>
-                </div>
-                <div class="flex flex-col justify-center items-center cursor-pointer hover:text-red-600">
+                </button>
+                <button class="flex flex-col justify-center items-center cursor-pointer hover:text-red-600">
                     <a class="flex flex-col justify-center items-center cursor-pointer">
                         <i class="fas fa-shopping-basket text-3xl lg:text-2xl"></i>
                         <p>Panier</p>
                     </a>
-                </div>
+                </button>
             </div>
         </div>
     </header>
@@ -43,7 +43,7 @@
     <section id="bg-hb" class="lg:h-96 h-40 ">
     </section>
 
-    <main class="max-w-screen-xl lg:w-8/12 flex flex-col justify-center items-center m-auto">
+    <main class="max-w-screen-xl lg:w-10/12 flex flex-col justify-center items-center m-auto">
         <h2 class="text-3xl p-4 underline">Nos produits</h2>
         <div class="w-full py-4 mb-8">
             <ul class="flex w-full justify-around text-xl flex-wrap">
@@ -55,19 +55,19 @@
             </ul>
         </div>
 
-        <div class="w-full">
+        <div id="noeud_parent" class="w-full">
 
-            <div id="carte" class="flex flex-col md:flex-row w-full md:h-60 my-8 carte bg-black hidden">
-                <div class="lg:w-6/12 w-full h-80 md:h-auto xl:w-4/12 cursor-pointer p-2">
-                    <a href="./HTML/prod0.html">
-                        <img id="photo_p0" class="h-full w-full" alt="Photo du produit" src="">
+            <div id="carte" class="flex flex-col md:flex-row w-11/12 m-auto md:h-60 my-8 carte hidden hover:shadow-lg">
+                <div class="lg:w-6/12 w-full h-80 md:h-auto xl:w-4/12 cursor-pointer p-2 bg-black">
+                    <a href="./HTML/product.html">
+                        <img class="h-full w-full photo_produit" alt="Photo du produit" src="">
                     </a>
                 </div>
                 <div class="flex flex-col w-full lg:w-6/12 xl:w-8/12 relative h-60 bg-white">
-                    <p id="nom_p0" class="p-2 m-2"></p>
-                    <p id="description_p0" class="p-2 m-2"></p>
-                    <p id="prix_p0" class="absolute bottom-1 left-1 p-2 m-4 rounded"></p>
-                    <a href="./HTML/prod0.html" class="absolute bottom-1 right-1 p-2 bg-gray-200 rounded m-4 cursor-pointer hover:bg-red-600 hover:text-white">Voir plus de détails</a>
+                    <p class="p-2 m-2 nom_produit"></p>
+                    <p class="p-2 m-2 description_produit"></p>
+                    <p class="absolute bottom-1 left-1 p-2 m-4 rounded prix_produit"></p>
+                    <a href="./HTML/product.html" class="absolute bottom-1 right-1 p-2 bg-gray-200 rounded m-4 cursor-pointer hover:bg-red-600 hover:text-white see_more">Voir plus de détails</a>
                 </div>
             </div>
 
@@ -75,8 +75,17 @@
 
     </main>
 
-    <footer>
-
+    <footer class="w-full flex flex-col lg:flex-row justify-around items-center h-auto lg:h-28 bg-gray-600 text-white">
+        <h4 class="hover:underline cursor-pointer p-2">Contact</h4>
+        <h4 class="hover:underline cursor-pointer p-2">CGV</h4>
+        <h4 class="hover:underline cursor-pointer p-2">Confidantialité et cookies</h4>
+        <div class="flex flex-col justify-center">
+            <ul class="flex">
+                <li class="hover:underline cursor-pointer mr-2">Instagram</li>
+                <li class="hover:underline cursor-pointer mr-2">Facebook</li>
+                <li class="hover:underline cursor-pointer mr-2">Twitter</li>
+            </ul>
+        </div>
     </footer>
 </body>
 </html>
