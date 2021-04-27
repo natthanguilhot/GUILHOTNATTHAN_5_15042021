@@ -20,29 +20,27 @@ fetch('http://localhost:3000/api/cameras')
         nomProdct.innerHTML = product.name;
         descriptionProduct.innerHTML = product.description;
         // seeMore.setAttribute('id', product._id);
-        let price = product.price/100;
-        new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR'}).format(price);
-        prixProduct.innerHTML = price+' €';
+        let price = product.price;
+        new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(price);
+        prixProduct.innerHTML = price/100+' €';
 
 
-
-        let id = product._id
-        seeMore.addEventListener('click', function() {
-            const url = new URL('http://localhost:3000/api/cameras/'+id);
-            // let lienProduct = newCarteProd.querySelector('.lien');
-            // lienProduct.setAttribute('href',url)
-            fetch(url)
-            .then(response => response.json()
-            .then(response => {
-                console.log(response);
-                let imgProduct = document.querySelector('img');
-                let nomProdct = document.querySelector('.nom_produit')
-                let descriptionProduct = document.querySelector('.description_produit');
-                let prixProduct = document.querySelector('.prix_produit');
-                nomProdct.innerHTML = response.name;
-        
-            }))
-        });
+        // let id = product._id
+        // seeMore.addEventListener('click', function() {
+        //     const url = new URL('http://localhost:3000/api/cameras/'+id);
+        //     // let lienProduct = newCarteProd.querySelector('.lien');
+        //     // lienProduct.setAttribute('href',url)
+        //     fetch(url)
+        //     .then(response => response.json()
+        //     .then(response => {
+        //         console.log(response);
+        //         let imgProduct = document.querySelector('img');
+        //         let nomProdct = document.querySelector('.nom_produit')
+        //         let descriptionProduct = document.querySelector('.description_produit');
+        //         let prixProduct = document.querySelector('.prix_produit');
+        //         nomProdct.innerHTML = response.name;
+        //     }))
+        // });
     }
 }));
 //
