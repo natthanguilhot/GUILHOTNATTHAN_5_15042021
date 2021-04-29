@@ -1,3 +1,5 @@
+const baseUrl = "http://127.0.0.1:5500/Front-end/HTML/";
+
 // Affichage des produits
 fetch('http://localhost:3000/api/cameras')
 .then(response => response.json()
@@ -19,28 +21,17 @@ fetch('http://localhost:3000/api/cameras')
         imgProduct.setAttribute('src', product.imageUrl);
         nomProdct.innerHTML = product.name;
         descriptionProduct.innerHTML = product.description;
-        // seeMore.setAttribute('id', product._id);
-        let price = product.price;
-        new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(price);
-        prixProduct.innerHTML = price/100+' €';
+        let price = new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(product.price/100);
 
+        prixProduct.innerHTML = price;
 
-        // let id = product._id
-        // seeMore.addEventListener('click', function() {
-        //     const url = new URL('http://localhost:3000/api/cameras/'+id);
-        //     // let lienProduct = newCarteProd.querySelector('.lien');
-        //     // lienProduct.setAttribute('href',url)
-        //     fetch(url)
-        //     .then(response => response.json()
-        //     .then(response => {
-        //         console.log(response);
-        //         let imgProduct = document.querySelector('img');
-        //         let nomProdct = document.querySelector('.nom_produit')
-        //         let descriptionProduct = document.querySelector('.description_produit');
-        //         let prixProduct = document.querySelector('.prix_produit');
-        //         nomProdct.innerHTML = response.name;
-        //     }))
-        // });
+        let id = product._id;
+
+        const url = new URL(baseUrl + 'product.html');
+        url.searchParams.append('id', id);
+
+        let lienProduct = newCarteProd.querySelector('.lien');
+        lienProduct.setAttribute('href',url);
     }
 }));
 //

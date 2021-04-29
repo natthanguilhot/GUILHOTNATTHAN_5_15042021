@@ -20,9 +20,9 @@
 <body class="bg-gray-50">
     <header class="w-full bg-gray-200">
         <div class="flex flex-col lg:flex-row m-auto w-full lg:w-10/12 xl:w-8/12 justify-between items-center max-w-screen-xl lg:h-20">
-            <h1 class="text-6xl cursor-pointer w-auto flex justify-center items-center"><a href="#">Orinoco</a></h1>
+            <h1 class="text-6xl cursor-pointer w-auto flex justify-center items-center hover:text-red-600"><a href="#">Orinoco</a></h1>
             <div class="flex justify-content items-center w-8/12 h-12 lg:w-7/12">
-                <input type="search" class="h-4/6 m-auto w-full rounded-xl focus:bg-black text-black focus:text-white pl-2 text-xl transition-colors">
+                <input type="search" class="h-4/6 m-auto w-full rounded-xl text-black pl-2 text-xl transition-colors focus:bg-red-600 focus:text-white">
                 <button><i class="fas fa-search cursor-pointer pl-2"></i></button>
             </div>
             <div class="flex w-6/12 lg:w-2/12 justify-around items-center">
@@ -58,10 +58,8 @@
         <div id="noeud_parent" class="w-full">
 
             <div id="carte" class="flex flex-col md:flex-row w-11/12 m-auto md:h-60 my-8 carte hidden hover:shadow-lg">
-                <div class="lg:w-6/12 w-full h-80 md:h-auto xl:w-4/12 cursor-pointer p-2 bg-black">
-                    <a href="./HTML/product.html">
-                        <img class="h-full w-full photo_produit" alt="Photo du produit" src="">
-                    </a>
+                <div class="lg:w-6/12 w-full h-80 md:h-auto xl:w-4/12 p-2 bg-black">
+                    <img class="h-full w-full photo_produit" alt="Photo du produit" src="">
                 </div>
                 <div class="flex flex-col w-full lg:w-6/12 xl:w-8/12 relative h-60 bg-white">
                     <p class="p-2 m-2 nom_produit"></p>

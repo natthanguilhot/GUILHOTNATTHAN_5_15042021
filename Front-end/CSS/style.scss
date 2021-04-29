@@ -4,10 +4,10 @@
     box-sizing: border-box;
 }
 body {
-    font-family: Roboto ,Arial, Helvetica, sans-serif;
+    font-family: "Roboto" ,Arial, Helvetica, sans-serif!important;
 }
 h1 {
-    font-family: "Caveat";
+    font-family: "Caveat"!important;
 }
 #bg-hb {
     background-image: url(../img/photography-2751464_640.jpg);
@@ -27,4 +27,16 @@ ul {
     transition-duration: 0.2s;
     transition-timing-function: ease-out;
     border: none;
+}
+
+// Enlever les flèches par défaut de l'input number
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
