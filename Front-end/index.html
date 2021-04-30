@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="JS/index.js" defer></script>
+    <script src="JS/script.js" defer></script>
+
     <link rel="stylesheet" type="text/css" href="./CSS/style.css">
     <!-- <link rel="icon" href="favicon.ico" /> -->
 
@@ -20,22 +22,25 @@
 <body class="bg-gray-50">
     <header class="w-full bg-gray-200">
         <div class="flex flex-col lg:flex-row m-auto w-full lg:w-10/12 xl:w-8/12 justify-between items-center max-w-screen-xl lg:h-20">
-            <h1 class="text-6xl cursor-pointer w-auto flex justify-center items-center hover:text-red-600"><a href="#">Orinoco</a></h1>
+            <h1 class="text-6xl cursor-pointer w-auto flex justify-center items-center hover:text-red-600"><a href="./index.html">Orinoco</a></h1>
             <div class="flex justify-content items-center w-8/12 h-12 lg:w-7/12">
                 <input type="search" class="h-4/6 m-auto w-full rounded-xl text-black pl-2 text-xl transition-colors focus:bg-red-600 focus:text-white">
-                <button><i class="fas fa-search cursor-pointer pl-2"></i></button>
+                <i class="fas fa-search cursor-pointer pl-2"></i>
             </div>
             <div class="flex w-6/12 lg:w-2/12 justify-around items-center">
-                <button class="flex flex-col justify-center items-center cursor-pointer hover:text-red-600">
-                    <i class="fas fa-home text-3xl lg:text-2xl"></i>
-                    <p>Accueil</p>
-                </button>
-                <button class="flex flex-col justify-center items-center cursor-pointer hover:text-red-600">
-                    <a class="flex flex-col justify-center items-center cursor-pointer">
+                <div>
+                    <a href="./index.html" class="flex flex-col justify-center items-center cursor-pointer hover:text-red-600">
+                        <i class="fas fa-home text-3xl lg:text-2xl"></i>
+                        <p>Accueil</p>
+                    </a>
+                </div>
+                <div class="flex flex-col justify-center items-center cursor-pointer hover:text-red-600 relative">
+                    <a href="./HTML/panier.html" class="flex flex-col justify-center items-center cursor-pointer hover:text-red-600">
                         <i class="fas fa-shopping-basket text-3xl lg:text-2xl"></i>
                         <p>Panier</p>
                     </a>
-                </button>
+                    <div id="number_prod_in_cart" class="absolute -top-1 -right-1 text-center align-middle">0</div>
+                </div>
             </div>
         </div>
     </header>

@@ -40,3 +40,52 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.anim_erreur_lentille {
+    animation: anim_erreur_lentille 0.6s ease 0s both;
+}
+
+@keyframes anim_erreur_lentille {
+    0% {
+        transform: translateX(5%);
+    }
+    25% {
+        transform: translateX(-5%);
+    }
+    50% {
+        transform: translateX(5%);
+    }
+    75% {
+        transform: translateX(-5%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.anim_add_cart_ok {
+    animation: anim_add_cart_ok 3s ease 0s both;
+
+}
+@keyframes anim_add_cart_ok {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+    10% {
+        transform: translateY(-25%);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    75% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(25%);
+        opacity: 0;
+    }
+}
