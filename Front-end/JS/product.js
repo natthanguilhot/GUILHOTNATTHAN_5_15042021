@@ -7,10 +7,10 @@ fetch("http://localhost:3000/api/cameras/"+ id)
 .then(response => response.json()
 .then(response => {
     let imgProduct = document.querySelector('img');
-    let nomProdct = document.querySelector('.nom_produit')
+    let nomProduct = document.querySelector('.nom_produit')
     let descriptionProduct = document.querySelector('.description_produit');
     let prixProduct = document.querySelector('.prix_produit');
-    nomProdct.innerHTML = response.name;
+    nomProduct.innerHTML = response.name;
     descriptionProduct.innerHTML = response.description
 
     let price = new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(response.price/100);
@@ -31,22 +31,20 @@ fetch("http://localhost:3000/api/cameras/"+ id)
     //
 
     // Gestion de la quantité
-    // let qtyPlus = document.querySelector('#qtyplus');
-    // let qtyMinus = document.querySelector('#qtyminus');
-    // let inputQty = document.querySelector('#qty');
-    // let numberQty = 1;
-    // inputQty.setAttribute('value',numberQty);
+    let qtyPlus = document.querySelector('#qtyplus');
+    let qtyMinus = document.querySelector('#qtyminus');
+    let inputQty = document.querySelector('#qty');
+    let numberQty = 1;
+    inputQty.setAttribute('value',numberQty);
 
-    // qtyMinus.addEventListener('click', function() {
-    //     inputQty.setAttribute('value',numberQty-1);
-    //     numberQty = numberQty-1;
-    //     inputQty.innerHTML = numberQty;
-    // });
-    // qtyPlus.addEventListener('click', function() {
-    //     inputQty.setAttribute('value',numberQty+1);
-    //     numberQty = numberQty+1;
-    //     inputQty.innerHTML = numberQty;
-    // });
+    qtyMinus.addEventListener('click', function() {
+        inputQty.setAttribute('value',numberQty-1);
+        numberQty = numberQty-1;
+    });
+    qtyPlus.addEventListener('click', function() {
+        inputQty.setAttribute('value',numberQty+1);
+        numberQty = numberQty+1;
+    });
     //
 
 
@@ -68,6 +66,7 @@ fetch("http://localhost:3000/api/cameras/"+ id)
         } else { // Sinon si il y a deja des produits dans le panier, alors on push le produit dans tableau 'productInCart' et on l'insert dans local storage
             if(productInCart) {
                 let product = {
+                    id : response._id,
                     nom : response.name,
                     prix : response.price,
                     option : selectOption.value
@@ -92,6 +91,7 @@ fetch("http://localhost:3000/api/cameras/"+ id)
             } else { // Sinon si LocalStorage vide, on récupère le tableau 'productInCart', on push le produit dans le tableau et on met a jour le LocalStorage
                 productInCart = [];
                 let product = {
+                    id : response._id,
                     nom : response.name,
                     prix : response.price,
                     option : selectOption.value

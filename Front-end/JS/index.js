@@ -16,7 +16,6 @@ fetch('http://localhost:3000/api/cameras')
         let nomProdct = newCarteProd.querySelector('.nom_produit')
         let descriptionProduct = newCarteProd.querySelector('.description_produit');
         let prixProduct = newCarteProd.querySelector('.prix_produit');
-        let seeMore = newCarteProd.querySelector('.see_more');
 
         imgProduct.setAttribute('src', product.imageUrl);
         nomProdct.innerHTML = product.name;
