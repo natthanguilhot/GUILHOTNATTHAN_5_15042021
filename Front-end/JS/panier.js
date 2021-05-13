@@ -20,11 +20,13 @@ fetch("http://localhost:3000/api/cameras")
         let imgProduit = newCarteProdPanier.querySelector('.img_produit');
         let nomProduit = newCarteProdPanier.querySelector('.nom_produit');
         let optionProduit = newCarteProdPanier.querySelector('.option_produit');
+        let qteProduit = newCarteProdPanier.querySelector('.qte_produit');
         let prixProduit = newCarteProdPanier.querySelector('.prix_produit');
         let price = new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(product.prix/100); // multiplier par x quantité
         nomProduit.innerHTML = product.nom;
         optionProduit.innerHTML = product.option;
         prixProduit.innerHTML = price;
+        qteProduit.innerHTML = product.qty;
         // 
 
         // Afficher l'image lié à l'id du produit
@@ -39,13 +41,14 @@ fetch("http://localhost:3000/api/cameras")
         // Affichage du prix
         let prixPanierHTML = document.querySelector('#prix_panier');
         let prixTotalHTML = document.querySelector('#prix_total');
+        let prixLivraison = new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(49900);
         let pricePanier = new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(prixPanier/100); 
         prixPanierHTML.innerHTML = pricePanier;
-        prixTotalHTML.innerHTML = pricePanier + 4.99;
+        prixTotalHTML.innerHTML = pricePanier + prixLivraison;
         //
 
         // Suppresion du produit 
-        let btnSupprimer = document.querySelector('#supprimer_produit_panier');
+        let btnSupprimer = document.querySelector('.supprimer_produit_panier');
         btnSupprimer.addEventListener('click', function() {
             
         });
