@@ -1,4 +1,5 @@
 let prixPanier = 0;
+let dataId = -1;
 
 //Requête pour afficher les produits du panier
 fetch("http://localhost:3000/api/cameras")
@@ -6,8 +7,6 @@ fetch("http://localhost:3000/api/cameras")
 .then(response => {
     let productInCart = [];
     productInCart = JSON.parse(localStorage.getItem('produit'));
-    console.log(productInCart);
-
     for(let product of productInCart) {
         prixPanier = product.prix + prixPanier;
         // Copie du template et ajout du clone au noeud parent
@@ -17,18 +16,20 @@ fetch("http://localhost:3000/api/cameras")
         parentNodePanier.appendChild(newCarteProdPanier);
         newCarteProdPanier.removeAttribute('id');
         newCarteProdPanier.classList.remove('hidden');
+        newCarteProdPanier.dataset.id = dataId+1;
+        dataId = dataId +1;
         let imgProduit = newCarteProdPanier.querySelector('.img_produit');
         let nomProduit = newCarteProdPanier.querySelector('.nom_produit');
         let optionProduit = newCarteProdPanier.querySelector('.option_produit');
         let qteProduit = newCarteProdPanier.querySelector('.qte_produit');
         let prixProduit = newCarteProdPanier.querySelector('.prix_produit');
-        let price = new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(product.prix/100); // multiplier par x quantité
+        let price = new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(product.prix/100);
         nomProduit.innerHTML = product.nom;
         optionProduit.innerHTML = product.option;
         prixProduit.innerHTML = price;
         qteProduit.innerHTML = product.qty;
         // 
-
+        
         // Afficher l'image lié à l'id du produit
         let productId = product.id;
         for(let product of response) {
@@ -37,21 +38,27 @@ fetch("http://localhost:3000/api/cameras")
             }
         }
         //
-
+    }
         // Affichage du prix
+        let livraison = 499;
+        let prixTotalPanier = prixPanier + livraison;
         let prixPanierHTML = document.querySelector('#prix_panier');
         let prixTotalHTML = document.querySelector('#prix_total');
-        let prixLivraison = new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(49900);
         let pricePanier = new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(prixPanier/100); 
+        let priceTotalPanierConvert = new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(prixTotalPanier/100); 
         prixPanierHTML.innerHTML = pricePanier;
-        prixTotalHTML.innerHTML = pricePanier + prixLivraison;
+        prixTotalHTML.innerHTML = priceTotalPanierConvert;
         //
 
         // Suppresion du produit 
-        let btnSupprimer = document.querySelector('.supprimer_produit_panier');
-        btnSupprimer.addEventListener('click', function() {
-            
-        });
+        let allBtnSuppr = document.querySelectorAll('.supprimer_produit_panier')
+        for(let btn of allBtnSuppr) {
+            btn.addEventListener('click', function() {
+                let idData = this.parentNode.parentNode.parentNode.dataset.id;
+                productInCart.splice([idData],1);
+                localStorage.setItem('produit', JSON.stringify(productInCart));
+                window.location.reload();
+            });    
+        }
         //
-    }
 }));

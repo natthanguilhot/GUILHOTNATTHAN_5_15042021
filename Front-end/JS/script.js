@@ -12,7 +12,6 @@ function totalProductInCart() {
             numberTotalOfProductInCart = numberOfProduct + numberTotalOfProductInCart;
         }
         numberOfProductInCart.innerHTML = numberTotalOfProductInCart;
-        console.log('refresh total qté panier');
     }    
 }
 totalProductInCart();
