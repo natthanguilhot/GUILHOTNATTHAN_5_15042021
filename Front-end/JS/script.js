@@ -1,4 +1,5 @@
 // Affichage nombre produit dans le panier
+// TODO Juste afficher le nombre d'élément dans le panier
 let numberOfProductInCart = document.querySelector('#number_prod_in_cart');
 productInCart = [];
 productInCart = JSON.parse(localStorage.getItem('produit'));

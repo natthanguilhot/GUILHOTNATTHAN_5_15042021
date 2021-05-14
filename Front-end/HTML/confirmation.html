@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../JS/script.js" defer></script>
+    <script src="../JS/confirm.js" defer></script>
+
+    <link rel="stylesheet" type="text/css" href="../CSS/style.css">
+    <!-- <link rel="icon" href="favicon.ico" /> -->
+
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Roboto&display=swap" rel="stylesheet">
+    
+    <script src="https://kit.fontawesome.com/d4c8c8f50d.js" crossorigin="anonymous"></script>
+
+    <title>Orinoco</title>
+</head>
+<body class="bg-gray-50">
+    <header class="w-full bg-gray-200">
+        <div class="flex flex-col lg:flex-row m-auto w-full lg:w-10/12 xl:w-8/12 justify-between items-center max-w-screen-xl lg:h-20">
+            <h1 class="text-6xl cursor-pointer w-auto flex justify-center items-center hover:text-red-600"><a href="./index.html">Orinoco</a></h1>
+            <div class="flex justify-content items-center w-8/12 h-12 lg:w-7/12">
+                <input type="search" class="h-4/6 m-auto w-full rounded-xl text-black pl-2 text-xl transition-colors focus:bg-red-600 focus:text-white">
+                <i class="fas fa-search cursor-pointer pl-2"></i>
+            </div>
+            <div class="flex w-6/12 lg:w-2/12 justify-around items-center">
+                <div>
+                    <a href="../index.html" class="flex flex-col justify-center items-center cursor-pointer hover:text-red-600">
+                        <i class="fas fa-home text-3xl lg:text-2xl"></i>
+                        <p>Accueil</p>
+                    </a>
+                </div>
+                <div class="flex flex-col justify-center items-center cursor-pointer hover:text-red-600 relative">
+                    <a href="./panier.html" class="flex flex-col justify-center items-center cursor-pointer hover:text-red-600">
+                        <i class="fas fa-shopping-basket text-3xl lg:text-2xl"></i>
+                        <p>Panier</p>
+                    </a>
+                    <div id="number_prod_in_cart" class="absolute -top-1 -right-1 text-center align-middle">0</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <footer class="w-full flex flex-col lg:flex-row justify-around items-center h-auto lg:h-28 bg-gray-600 text-white">
+        <h2 class="hover:underline cursor-pointer p-2">Contact <i class="fas fa-envelope"></i></h2>
+        <h2 class="hover:underline cursor-pointer p-2">CGV <i class="fas fa-file-invoice"></i></h2>
+        <h2 class="hover:underline cursor-pointer p-2">Confidantialité et cookies <i class="fas fa-cookie"></i></h2>
+        <div class="flex flex-col justify-center">
+            <ul class="flex">
+                <li class="hover:underline cursor-pointer mr-2">Instagram <i class="fab fa-instagram-square"></i></li>
+                <li class="hover:underline cursor-pointer mr-2">Facebook <i class="fab fa-facebook-square"></i></li>
+                <li class="hover:underline cursor-pointer mr-2">Twitter <i class="fab fa-twitter-square"></i></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

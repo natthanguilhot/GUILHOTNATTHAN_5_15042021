@@ -73,7 +73,7 @@ fetch("http://localhost:3000/api/cameras/"+ id)
                     prix : response.price*Number(inputQty.value),
                     option : selectOption.value
                 }
-                // Verif si id et option du produit sont deja présent
+                // Verif si id et option du produit sont deja présent, si oui, on change la quantité
                 let isProductInCart = false;
                 const checkProdInCart = function () {
                     for (let i of productInCart) {
@@ -83,6 +83,12 @@ fetch("http://localhost:3000/api/cameras/"+ id)
                             qtyOfProductInCart = i.qty;
                             i.qty = Number(qtyOfProductInCart) + Number(inputQty.value);
                             i.prix = response.price * i.qty;
+                            // Anim validation d'ajout
+                            confirmAddCart.classList.remove('hidden');
+                            confirmAddCart.classList.add('anim_add_cart_ok');
+                            setTimeout(function() {
+                                confirmAddCart.classList.add('hidden');
+                            },3000);        
                             break;
                         }
                     }
