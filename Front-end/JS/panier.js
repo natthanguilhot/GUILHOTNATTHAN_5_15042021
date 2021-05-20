@@ -1,5 +1,7 @@
 let prixPanier = 0;
 let dataId = -1;
+let carteProdPanier = document.querySelector('div#template_carte_produit_panier');
+let parentNodePanier = document.querySelector('#liste_produits_panier');
 
 //Requête pour afficher les produits du panier
 fetch("http://localhost:3000/api/cameras")
@@ -10,15 +12,13 @@ fetch("http://localhost:3000/api/cameras")
     for(let product of productInCart) {
         prixPanier = product.prix + prixPanier;
         // Copie du template et ajout du clone au noeud parent
-        let carteProdPanier = document.querySelector('div#template_carte_produit_panier');
-        let parentNodePanier = document.querySelector('#liste_produits_panier');
-        let btnSuppr = document.querySelector('.supprimer_produit_panier');
         let newCarteProdPanier = carteProdPanier.cloneNode(true);
         parentNodePanier.appendChild(newCarteProdPanier);
         newCarteProdPanier.removeAttribute('id');
         newCarteProdPanier.classList.remove('hidden');
-        btnSuppr.dataset.id = dataId+1; // TODO DATAID QUI BUG
-        dataId = dataId +1;
+        let btnSuppr = newCarteProdPanier.querySelector('.supprimer_produit_panier');
+        btnSuppr.dataset.id = dataId+1;
+        dataId += 1;
         let imgProduit = newCarteProdPanier.querySelector('.img_produit');
         let nomProduit = newCarteProdPanier.querySelector('.nom_produit');
         let optionProduit = newCarteProdPanier.querySelector('.option_produit');
@@ -52,7 +52,7 @@ fetch("http://localhost:3000/api/cameras")
     //
 
     // Suppresion du produit 
-    let allBtnSuppr = document.querySelectorAll('.supprimer_produit_panier')
+    let allBtnSuppr = document.querySelectorAll('.supprimer_produit_panier');
     for(let btn of allBtnSuppr) {
         btn.addEventListener('click', function() {
             let idData = this.parentNode.dataset.id;
@@ -88,25 +88,55 @@ fetch("http://localhost:3000/api/cameras")
             products : tablProductId,
         };
 
-        if(nomForm === '') { // Si formulaire ok (ou non) alors ...
-
-        } else { // Si formulaire non ok (ou ok) alors .......
-            console.log();
-            contact.push(formContact);
-            console.log(JSON.stringify(data));
+        function nomPrenomVilleControl() {
+           if(/^[A-Za-z]{2,20}$/.test(nomForm) && /^[A-Za-z]{2,20}$/.test(prenomForm) && /^[A-Za-z]{2,20}$/.test(villeForm)) {
+            return true;
+           }else {
+            alert('Les champs Nom, Prénom et Ville ne doivent contenir que des lettres.')
+            return false;
+           }
+        };
+        function emailControl () {
+            if(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(mailForm)){
+                return true;
+            } else {
+                alert('Email incorrect');
+                return false;
+            }
+        }
+        function addressControl () {
+            if(/^[A-Za-z0-9\s]{5,50}$/.test(villeForm)) {
+                return true;
+            } else {
+                alert('Adresse incorrect');
+                return false;
+            }
+        }
+        if(nomPrenomVilleControl() && emailControl() && addressControl()) { // Si formulaire ok alors
+            contact.push(formContact); // on push le formulaire dans le tableau contact
+            console.log(data);
             fetch("http://localhost:3000/api/cameras/order", {
             method: 'POST',
             headers: { 
             'Accept': 'application/json', 
             'Content-Type': 'application/json' 
             },
-                body: JSON.stringify(data),
+                body: JSON.stringify(data), // On envoie les données au serveur
             })
             .then(response => response.json())
             .then(response => {
-                console.log(response);
+                let order = []; // on créé un tableau order
+                let orderResume = { // on créé un objet résumé
+                    orderLength : response.products.length,
+                    orderId : response.orderId
+                }
+                order.push(orderResume); // on push l'objet dans le tableau 
+                localStorage.setItem('order', JSON.stringify(order)); // on envoie le tableau dans le LS
             });
         }
+        event.preventDefault();
+        localStorage.clear('produit'); // on vide le panier LS
+        window.location.href = "confirmation.html"; // on envoie sur la page confirmation
     });        
 }));
 
