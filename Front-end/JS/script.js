@@ -7,12 +7,21 @@ function totalProductInCart() {
     if (productInCart === null) {
         numberOfProductInCart.innerHTML = '0';
     }else {
-        let numberTotalOfProductInCart = 0;
-        for(let i of productInCart) {
-            let numberOfProduct = i.qty;
-            numberTotalOfProductInCart = numberOfProduct + numberTotalOfProductInCart;
-        }
+        let numberTotalOfProductInCart = productInCart.length;
         numberOfProductInCart.innerHTML = numberTotalOfProductInCart;
     }    
 }
 totalProductInCart();
+
+function affichageConfirmationCommande () {
+    let orderResume = JSON.parse(localStorage.getItem("order"));
+    let nameResumeHTML = document.querySelector('#name');
+    let numberOfProductResumeHTML = document.querySelector('#nbr_produit');
+    let orderIdHTML = document.querySelector('#order_id');
+    nameResumeHTML.innerHTML = orderResume[0].prenom;
+    numberOfProductResumeHTML.innerHTML = orderResume[0].orderLength;
+    orderIdHTML.innerHTML = orderResume[0].orderId;
+    setTimeout(function(){
+        localStorage.clear();
+    },1)
+}

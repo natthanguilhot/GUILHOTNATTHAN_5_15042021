@@ -45,8 +45,15 @@
         </div>
     </header>
 
-    <main>
-        
+    <main class="flex justify-center items-center my-44">
+        <section class="bg-gray-300 w-11/12 h-auto m-auto p-8 flex flex-col justify-center items-center max-w-md">
+            <div>
+                <p class="my-4">Merci <span id="name"></span> d'avoir acheté <span id="nbr_produit"></span> produit(s) sur notre site ! Nous te remercions de la confiance que tu nous portes !</p>
+                <p class="my-4">Nous t'invitons à retrouver un résumé de ta commande dans ta boite mail !</p>
+                <p class="my-4">Commande n° : <span id="order_id"></span></p>
+            </div>
+            <a href="../index.html" class="px-8 py-4 m-8 bg-gray-200 w-full text-center max-w-xs hover:text-white hover:bg-red-600 rounded shadow">Retourner à l'accueil</a>
+        </section>
     </main>
 
     <footer class="w-full flex flex-col lg:flex-row justify-around items-center h-auto lg:h-28 bg-gray-600 text-white">

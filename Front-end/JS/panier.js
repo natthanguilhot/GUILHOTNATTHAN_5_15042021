@@ -89,10 +89,10 @@ fetch("http://localhost:3000/api/cameras")
         };
 
         function nomPrenomVilleControl() {
-           if(/^[A-Za-z]{2,20}$/.test(nomForm) && /^[A-Za-z]{2,20}$/.test(prenomForm) && /^[A-Za-z]{2,20}$/.test(villeForm)) {
+           if(/^[A-Za-z\s]{2,20}$/.test(nomForm) && /^[A-Za-z]{2,20}$/.test(prenomForm) && /^[A-Za-z]{2,20}$/.test(villeForm)) {
             return true;
            }else {
-            alert('Les champs Nom, Prénom et Ville ne doivent contenir que des lettres.')
+            alert("Les champs Nom, Prénom et Ville ne doivent contenir que des lettres et pas d'espace inutile.")
             return false;
            }
         };
@@ -112,9 +112,8 @@ fetch("http://localhost:3000/api/cameras")
                 return false;
             }
         }
-        if(nomPrenomVilleControl() && emailControl() && addressControl()) { // Si formulaire ok alors
+        if(nomPrenomVilleControl() && emailControl() && addressControl()) { // on controle le formulaire, Si formulaire ok traitement ci dessous, sinon les fonctions envoie une alerte
             contact.push(formContact); // on push le formulaire dans le tableau contact
-            console.log(data);
             fetch("http://localhost:3000/api/cameras/order", {
             method: 'POST',
             headers: { 
@@ -128,15 +127,18 @@ fetch("http://localhost:3000/api/cameras")
                 let order = []; // on créé un tableau order
                 let orderResume = { // on créé un objet résumé
                     orderLength : response.products.length,
-                    orderId : response.orderId
+                    orderId : response.orderId,
+                    prenom : response.contact.firstName
                 }
                 order.push(orderResume); // on push l'objet dans le tableau 
                 localStorage.setItem('order', JSON.stringify(order)); // on envoie le tableau dans le LS
             });
+            localStorage.clear('produit'); // on vide le panier LS
+            window.location.href = "confirmation.html"; // on envoie sur la page confirmation    
+        } else {
+            console.log("Formulaire incorrect");
         }
-        event.preventDefault();
-        localStorage.clear('produit'); // on vide le panier LS
-        window.location.href = "confirmation.html"; // on envoie sur la page confirmation
+        event.preventDefault();      
     });        
 }));
 
