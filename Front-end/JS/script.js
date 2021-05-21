@@ -1,7 +1,14 @@
+const baseUrl = "http://127.0.0.1:5500/Front-end/HTML/";
+let prixPanier = 0;
+let dataId = -1;
+let carteProdPanier = document.querySelector('div#template_carte_produit_panier');
+let parentNodePanier = document.querySelector('#liste_produits_panier');
+
+
 // Affichage nombre produit dans le panier
 function totalProductInCart() {
     let numberOfProductInCart = document.querySelector('#number_prod_in_cart');
-    productInCart = [];
+    let productInCart = [];
     productInCart = JSON.parse(localStorage.getItem('produit'));
 
     if (productInCart === null) {
@@ -14,7 +21,7 @@ function totalProductInCart() {
 totalProductInCart();
 //
 // Affichage produits page index
-function affichageProduitsIndex (response) {
+export function affichageProduitsIndex (response) {
     for(let product of response) {
         let carteProd = document.querySelector('#carte');
         let noeudParent = document.querySelector('#noeud_parent');
@@ -45,8 +52,9 @@ function affichageProduitsIndex (response) {
     }
 };
 //
-// Controle formualair et envoie
-function formulaireCommande () {
+// Controle formualaire et envoie
+// TODO découper la fonction en 3/4 autre fonctions
+export function formulaireCommande () {
     // Formulaire de commande
     let btnFormulaireCommande = document.querySelector('#btncommande');
     btnFormulaireCommande.addEventListener('click', function(){
@@ -92,9 +100,9 @@ function formulaireCommande () {
                 }
                 order.push(orderResume); // on push l'objet dans le tableau 
                 localStorage.setItem('order', JSON.stringify(order)); // on envoie le tableau dans le LS
+                localStorage.removeItem('produit'); // on vide le panier LS
+                window.location.href = "confirmation.html"; // on envoie sur la page confirmation    
             });
-            localStorage.removeItem('produit'); // on vide le panier LS
-            window.location.href = "confirmation.html"; // on envoie sur la page confirmation    
         } 
         event.preventDefault();      
     });        
@@ -110,10 +118,14 @@ function affichageConfirmationCommande () {
     numberOfProductResumeHTML.innerHTML = orderResume[0].orderLength;
     orderIdHTML.innerHTML = orderResume[0].orderId;
     setTimeout(function(){
-        localStorage.remove('order');
+        localStorage.removeItem('order');
     },500)
 };
-function affichageProdPanier(response) {
+
+function test (prixamodifer) {
+    return new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(prixamodifer/100);
+}
+export function affichageProdPanier(response, productInCart) {
     for(let product of productInCart) {
         prixPanier = product.prix + prixPanier;
         // Copie du template et ajout du clone au noeud parent
@@ -129,7 +141,7 @@ function affichageProdPanier(response) {
         let optionProduit = newCarteProdPanier.querySelector('.option_produit');
         let qteProduit = newCarteProdPanier.querySelector('.qte_produit');
         let prixProduit = newCarteProdPanier.querySelector('.prix_produit');
-        let price = new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(product.prix/100);
+        let price = test(product.prix);
         nomProduit.innerHTML = product.nom;
         optionProduit.innerHTML = product.option;
         prixProduit.innerHTML = price;
@@ -182,7 +194,7 @@ function nomPrenomVilleControl(nomForm, prenomForm, villeForm) {
     if(/^[A-Za-z\s]{2,20}$/.test(nomForm) && /^[A-Za-z]{2,20}$/.test(prenomForm) && /^[A-Za-z]{2,20}$/.test(villeForm)) {
      return true;
     }else {
-     alert("Les champs Nom, Prénom et Ville ne doivent contenir que des lettres et pas d'espace inutile.")
+     alert("Les champs Nom, Prénom et Ville ne doivent contenir que des lettres, pas d'espace inutile et pas de caractères spécieaux(é,-,î..).")
      return false;
     }
  };

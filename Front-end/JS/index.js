@@ -1,4 +1,4 @@
-const baseUrl = "http://127.0.0.1:5500/Front-end/HTML/";
+import {affichageProduitsIndex} from './script.js';
 
 // Affichage des produits
 fetch('http://localhost:3000/api/cameras')
