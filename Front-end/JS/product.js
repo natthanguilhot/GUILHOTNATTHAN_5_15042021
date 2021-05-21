@@ -137,12 +137,6 @@ fetch("http://localhost:3000/api/cameras/"+ id)
                 setTimeout(function() {
                     confirmAddCart.classList.add('hidden');
                 },3000);
-
-
-                //Affichage nombre d'article dans panier
-                let numberOfProductInCart = document.querySelector('#number_prod_in_cart');
-                productInCart = JSON.parse(localStorage.getItem('produit'));
-                numberOfProductInCart.innerHTML = productInCart.length;
             }    
         }
     })
