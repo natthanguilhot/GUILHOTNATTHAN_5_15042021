@@ -9,5 +9,5 @@ fetch("http://localhost:3000/api/cameras")
 
     affichageProdPanier(response, productInCart);
     
-    formulaireCommande();
+    formulaireCommande(productInCart);
 }));

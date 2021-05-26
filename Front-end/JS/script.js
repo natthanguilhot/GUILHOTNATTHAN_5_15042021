@@ -54,7 +54,7 @@ export function affichageProduitsIndex (response) {
 //
 // Controle formualaire et envoie
 // TODO découper la fonction en 3/4 autre fonctions
-export function formulaireCommande () {
+export function formulaireCommande (productInCart) {
     // Formulaire de commande
     let btnFormulaireCommande = document.querySelector('#btncommande');
     btnFormulaireCommande.addEventListener('click', function(){
@@ -109,7 +109,7 @@ export function formulaireCommande () {
 };
 //
 //
-function affichageConfirmationCommande () {
+export function affichageConfirmationCommande () {
     let orderResume = JSON.parse(localStorage.getItem("order"));
     let nameResumeHTML = document.querySelector('#name');
     let numberOfProductResumeHTML = document.querySelector('#nbr_produit');
