@@ -1,2 +1,4 @@
-import {affichageConfirmationCommande} from './script.js';
+import {affichageConfirmationCommande, totalProductInCart} from './script.js';
+
+totalProductInCart();
 affichageConfirmationCommande();

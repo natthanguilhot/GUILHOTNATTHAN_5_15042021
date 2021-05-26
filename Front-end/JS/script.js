@@ -6,7 +6,7 @@ let parentNodePanier = document.querySelector('#liste_produits_panier');
 
 
 // Affichage nombre produit dans le panier
-function totalProductInCart() {
+export function totalProductInCart() {
     let numberOfProductInCart = document.querySelector('#number_prod_in_cart');
     let productInCart = [];
     productInCart = JSON.parse(localStorage.getItem('produit'));
@@ -18,7 +18,6 @@ function totalProductInCart() {
         numberOfProductInCart.innerHTML = numberTotalOfProductInCart;
     }    
 };
-totalProductInCart();
 //
 // Affichage produits page index
 export function affichageProduitsIndex (response) {
@@ -38,7 +37,7 @@ export function affichageProduitsIndex (response) {
         imgProduct.setAttribute('src', product.imageUrl);
         nomProdct.innerHTML = product.name;
         descriptionProduct.innerHTML = product.description;
-        let price = new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(product.price/100);
+        let price = prixConvert(product.price);
 
         prixProduct.innerHTML = price;
 
@@ -122,9 +121,9 @@ export function affichageConfirmationCommande () {
     },500)
 };
 
-function test (prixamodifer) {
+function prixConvert (prixamodifer) {
     return new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(prixamodifer/100);
-}
+};
 export function affichageProdPanier(response, productInCart) {
     for(let product of productInCart) {
         prixPanier = product.prix + prixPanier;
@@ -141,7 +140,7 @@ export function affichageProdPanier(response, productInCart) {
         let optionProduit = newCarteProdPanier.querySelector('.option_produit');
         let qteProduit = newCarteProdPanier.querySelector('.qte_produit');
         let prixProduit = newCarteProdPanier.querySelector('.prix_produit');
-        let price = test(product.prix);
+        let price = prixConvert(product.prix);
         nomProduit.innerHTML = product.nom;
         optionProduit.innerHTML = product.option;
         prixProduit.innerHTML = price;
@@ -181,8 +180,8 @@ export function affichageProdPanier(response, productInCart) {
     let prixTotalPanier = prixPanier + livraison;
     let prixPanierHTML = document.querySelector('#prix_panier');
     let prixTotalHTML = document.querySelector('#prix_total');
-    let pricePanier = new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(prixPanier/100); 
-    let priceTotalPanierConvert = new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(prixTotalPanier/100); 
+    let pricePanier = prixConvert(prixPanier); 
+    let priceTotalPanierConvert = prixConvert(prixTotalPanier); 
     prixPanierHTML.innerHTML = pricePanier;
     prixTotalHTML.innerHTML = priceTotalPanierConvert;
     //
@@ -214,4 +213,31 @@ function nomPrenomVilleControl(nomForm, prenomForm, villeForm) {
         return false;
     }
  };
+//
+// Page produit
+export function affichageProduit(response){
+    let imgProduct = document.querySelector('img');
+    let nomProduct = document.querySelector('.nom_produit')
+    let descriptionProduct = document.querySelector('.description_produit');
+    let prixProduct = document.querySelector('.prix_produit');
+    nomProduct.innerHTML = response.name;
+    descriptionProduct.innerHTML = response.description
+
+    let price = new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(response.price/100);
+    prixProduct.innerHTML = price;
+
+    imgProduct.setAttribute('src', response.imageUrl);
+
+    let title = document.querySelector('title');
+    title.innerHTML = 'Orinoco - ' + response.name;
+
+    for (let length of response.lenses) {
+        let selectLength = document.querySelector('#length');
+        const newOptionLength = document.createElement('option')
+        newOptionLength.setAttribute('value', length);
+        newOptionLength.innerHTML = length;
+        selectLength.appendChild(newOptionLength);
+    }
+};
+
 //

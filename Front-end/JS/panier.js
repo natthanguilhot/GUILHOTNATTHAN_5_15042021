@@ -1,4 +1,6 @@
-import {formulaireCommande, affichageProdPanier} from './script.js';
+import {formulaireCommande, affichageProdPanier, totalProductInCart} from './script.js';
+
+totalProductInCart();
 
 //Requête pour afficher les produits du panier
 fetch("http://localhost:3000/api/cameras")

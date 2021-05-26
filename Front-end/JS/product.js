@@ -1,35 +1,18 @@
+import {totalProductInCart,affichageProduit} from './script.js';
+
+totalProductInCart();
+
+
 // Récupération de l'id du produit via l'url
 const url = new URL(window.location.href);
 const id = url.searchParams.get('id');
+//
 
 // Requête au produit correspondant à l'id et affichage de celui ci
 fetch("http://localhost:3000/api/cameras/"+ id)
 .then(response => response.json()
 .then(response => {
-    let imgProduct = document.querySelector('img');
-    let nomProduct = document.querySelector('.nom_produit')
-    let descriptionProduct = document.querySelector('.description_produit');
-    let prixProduct = document.querySelector('.prix_produit');
-    nomProduct.innerHTML = response.name;
-    descriptionProduct.innerHTML = response.description
-
-    let price = new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(response.price/100);
-    prixProduct.innerHTML = price;
-
-    imgProduct.setAttribute('src', response.imageUrl);
-
-    let title = document.querySelector('title');
-    title.innerHTML = 'Orinoco - ' + response.name;
-
-    for (let length of response.lenses) {
-        let selectLength = document.querySelector('#length');
-        const newOptionLength = document.createElement('option')
-        newOptionLength.setAttribute('value', length);
-        newOptionLength.innerHTML = length;
-        selectLength.appendChild(newOptionLength);
-    }
-    //
-
+    affichageProduit(response);
     // Gestion de la quantité
     let qtyPlus = document.querySelector('#qtyplus');
     let qtyMinus = document.querySelector('#qtyminus');
