@@ -26,7 +26,7 @@ function prixConvert (prixamodifer) {
 };
 //
 
-/////////////////////////////////////////  PAGE INDEX
+/////////////////////////////////////////  PAGE INDEX ////////////////////////////////////////////////////
 // Affichage produits page index
 export function affichageProduitsIndex (response) {
     for(let product of response) {
@@ -61,7 +61,7 @@ export function affichageProduitsIndex (response) {
 //
 ////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////// PAGE PRODUIT
+//////////////////////////////////////////////////// PAGE PRODUIT ////////////////////////////////////////////////////
 export function affichageProduit(response){
     let imgProduct = document.querySelector('img');
     let nomProduct = document.querySelector('.nom_produit')
@@ -197,7 +197,7 @@ export function produit (response) {
 };
 ////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////// PAGE PANIER
+//////////////////////////////////////////////////// PAGE PANIER ////////////////////////////////////////////////////
 // Controle formualaire et envoie
 function getDataForm () {
     let adresseForm = document.querySelector('#adresse').value;
@@ -359,7 +359,7 @@ function nomPrenomVilleControl(nomForm, prenomForm, villeForm) {
  };
 //
 
-//////////////////////////////////////////////////// PAGE CONFIRMATION
+//////////////////////////////////////////////////// PAGE CONFIRMATION ////////////////////////////////////////////////////
 export function affichageConfirmationCommande () {
     let orderResume = JSON.parse(localStorage.getItem("order"));
     let nameResumeHTML = document.querySelector('#name');
@@ -373,3 +373,12 @@ export function affichageConfirmationCommande () {
     },500)
 };
 //
+//////////////////////////////////////////////// STORAGE
+// let storage = {
+//     save : function (key) {
+//         localStorage.setItem(key);
+//     }
+//     load : function (key) {
+//         localStorage.getItem(key)
+//     }
+// }
