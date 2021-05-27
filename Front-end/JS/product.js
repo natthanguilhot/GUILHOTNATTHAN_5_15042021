@@ -1,4 +1,4 @@
-import {totalProductInCart,affichageProduit} from './script.js';
+import {totalProductInCart,affichageProduit,checkProdInCart} from './script.js';
 
 totalProductInCart();
 
@@ -58,25 +58,7 @@ fetch("http://localhost:3000/api/cameras/"+ id)
                 }
                 // Verif si id et option du produit sont deja présent, si oui, on change la quantité
                 let isProductInCart = false;
-                const checkProdInCart = function () {
-                    for (let i of productInCart) {
-                        if (product.id === i.id && product.option === i.option) {
-                            isProductInCart = true;
-                            let qtyOfProductInCart;
-                            qtyOfProductInCart = i.qty;
-                            i.qty = Number(qtyOfProductInCart) + Number(inputQty.value);
-                            i.prix = response.price * i.qty;
-                            // Anim validation d'ajout
-                            confirmAddCart.classList.remove('hidden');
-                            confirmAddCart.classList.add('anim_add_cart_ok');
-                            setTimeout(function() {
-                                confirmAddCart.classList.add('hidden');
-                            },3000);        
-                            break;
-                        }
-                    }
-                }
-                checkProdInCart();
+                checkProdInCart(product);
                 //
                 // Si produit est déjà présent, alors on ajoute la quantité de l'input à la quantité déjà présente
                 if (isProductInCart === true) {
