@@ -337,7 +337,7 @@ function nomPrenomVilleControl(nomForm, prenomForm, villeForm) {
     if(/^[A-Za-z\s]{2,20}$/.test(nomForm) && /^[A-Za-z]{2,20}$/.test(prenomForm) && /^[A-Za-z]{2,20}$/.test(villeForm)) {
      return true;
     }else {
-     alert("Les champs Nom, Prénom et Ville ne doivent contenir que des lettres, pas d'espace inutile et pas de caractères spécieaux(é,-,î..).")
+     alert("Les champs Nom, Prénom et Ville ne doivent contenir que des lettres, pas d'espace inutile et pas de caractères spécieaux(&,-,(),§,! ..).")
      return false;
     }
  };
