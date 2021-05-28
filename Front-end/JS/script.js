@@ -383,4 +383,4 @@ let storage = {
     remove : function (key) {
         return localStorage.removeItem(key);
     }
-}
+};
