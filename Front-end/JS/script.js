@@ -59,7 +59,7 @@ export function affichageProduitsIndex (response) {
 ////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////// PAGE PRODUIT ////////////////////////////////////////////////////
-export function affichageProduit(response){
+function affichageProduit(response){
     let imgProduct = document.querySelector('img');
     let nomProduct = document.querySelector('.nom_produit')
     let descriptionProduct = document.querySelector('.description_produit');
@@ -231,7 +231,7 @@ function createArrayForAPI () {
         products : tablProductId,
     };
     return {contact : contact, data : data};
-}
+};
 function sendOrder () {
     let returnCreateArrayForAPI = createArrayForAPI();
     fetch("http://localhost:3000/api/cameras/order", {
