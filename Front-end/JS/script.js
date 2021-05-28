@@ -3,14 +3,11 @@ let prixPanier = 0;
 let dataId = -1;
 let carteProdPanier = document.querySelector('div#template_carte_produit_panier');
 let parentNodePanier = document.querySelector('#liste_produits_panier');
-let productInCart = [];
-productInCart = JSON.parse(localStorage.getItem('produit'));
-
 // Affichage nombre produit dans le panier
 export function totalProductInCart() {
     let numberOfProductInCart = document.querySelector('#number_prod_in_cart');
     let productInCart = [];
-    productInCart = JSON.parse(localStorage.getItem('produit'));
+    productInCart = storage.load('produit');
 
     if (productInCart === null) {
         numberOfProductInCart.innerHTML = '0';
@@ -70,7 +67,7 @@ export function affichageProduit(response){
     nomProduct.innerHTML = response.name;
     descriptionProduct.innerHTML = response.description
 
-    let price = new Intl.NumberFormat('fr-FR', {style :'currency', currency :'EUR', minimumFractionDigits : 2}).format(response.price/100);
+    let price = prixConvert(response.price);
     prixProduct.innerHTML = price;
 
     imgProduct.setAttribute('src', response.imageUrl);
@@ -86,7 +83,7 @@ export function affichageProduit(response){
         selectLength.appendChild(newOptionLength);
     }
 };
-export function produit (response) {
+export function pageProduit (response) {
     affichageProduit(response);
     // Gestion de la quantité
     let qtyPlus = document.querySelector('#qtyplus');
@@ -112,7 +109,7 @@ export function produit (response) {
     let confirmAddCart = document.querySelector('#confirmaddcart');
     addToCart.addEventListener('click', function() {
         let productInCart = [];
-        productInCart = JSON.parse(localStorage.getItem('produit'));    
+        productInCart = storage.load('produit') // JSON.parse(localStorage.getItem('produit'));    
         // Si option est === 'Choississez votre lentille' alors popup erreur ('Veuillez sélectionner une lentille !')
         if (selectOption.value === 'Choississez votre lentille') {
             errAddCart.classList.remove('hidden');
@@ -151,11 +148,11 @@ export function produit (response) {
                 //
                 // Si produit est déjà présent, alors on ajoute la quantité de l'input à la quantité déjà présente
                 if (isProductInCart === true) {
-                    localStorage.setItem('produit', JSON.stringify(productInCart));
+                    storage.save('produit',productInCart) // localStorage.setItem('produit', JSON.stringify(productInCart));
                 } else {
                     // Sinon push le produit dans le tableau productInCart et l'insérer dans le LS
                     productInCart.push(product);
-                    localStorage.setItem('produit', JSON.stringify(productInCart));
+                    storage.save('produit', productInCart) // localStorage.setItem('produit', JSON.stringify(productInCart));
     
                     //animation erreur ou validation d'ajout au panier
                     errAddCart.classList.add('hidden');
@@ -166,7 +163,7 @@ export function produit (response) {
                     },3000);
                     //Affichage nombre d'article dans panier
                     let numberOfProductInCart = document.querySelector('#number_prod_in_cart');
-                    productInCart = JSON.parse(localStorage.getItem('produit'));
+                    productInCart = storage.load('produit'); // JSON.parse(localStorage.getItem('produit'));
                     numberOfProductInCart.innerHTML = productInCart.length;    
                 }
             } else { // Sinon si LocalStorage vide, on récupère le tableau 'productInCart', on push le produit dans le tableau et on met a jour le LocalStorage
@@ -179,7 +176,7 @@ export function produit (response) {
                     option : selectOption.value
                 }
                 productInCart.push(product);
-                localStorage.setItem('produit', JSON.stringify(productInCart));
+                storage.save('produit',productInCart) // localStorage.setItem('produit', JSON.stringify(productInCart));
                 //animation erreur ou validation d'ajout au panier
                 errAddCart.classList.add('hidden');
                 confirmAddCart.classList.remove('hidden');
@@ -189,7 +186,7 @@ export function produit (response) {
                 },3000);
                 //Affichage nombre d'article dans panier
                 let numberOfProductInCart = document.querySelector('#number_prod_in_cart');
-                productInCart = JSON.parse(localStorage.getItem('produit'));
+                productInCart = storage.load('produit');
                 numberOfProductInCart.innerHTML = productInCart.length;
             }    
         }
@@ -225,6 +222,7 @@ function createArrayForAPI () {
     }
     contact.push(formContact);
     let tablProductId = [];
+    let productInCart = storage.load('produit');
     for(let prod of productInCart) {
         tablProductId.push(prod.id);
     };
@@ -253,8 +251,8 @@ function sendOrder () {
                 prenom : response.contact.firstName
             }
             order.push(orderResume); // on push l'objet dans le tableau 
-            localStorage.setItem('order', JSON.stringify(order)); // on envoie le tableau dans le LS
-            localStorage.removeItem('produit'); // on vide le panier LS
+            storage.save('order',order); // on envoie le tableau dans le LS
+            storage.remove('produit'); // on vide le panier LS
             window.location.href = "confirmation.html"; // on envoie sur la page confirmation    
         });
 };
@@ -263,12 +261,13 @@ export function formulaireCommande () {
     let btnFormulaireCommande = document.querySelector('#btncommande');
     btnFormulaireCommande.addEventListener('click', function(){
         let returnDataForm = getDataForm();
-        getDataForm(productInCart); // On récupère les input du formulaire
+        getDataForm(); // On récupère les input du formulaire
         checkForm(returnDataForm); // On vérifié les inputs et si c'est ok, on lance les autres fonctions
         event.preventDefault();      
     });        
 };
 export function affichageProdPanier(response, productInCart) {
+    productInCart = storage.load('produit') // JSON.parse(localStorage.getItem('produit'));    
     for(let product of productInCart) {
         prixPanier = product.prix + prixPanier;
         // Copie du template et ajout du clone au noeud parent
@@ -308,7 +307,7 @@ export function affichageProdPanier(response, productInCart) {
             let idData = this.dataset.id;
             console.log(idData);
             productInCart.splice([idData],1);
-            localStorage.setItem('produit', JSON.stringify(productInCart));
+            storage.save('produit',productInCart);
             let allDivProduit = document.querySelectorAll('.produit');
             for(let div of allDivProduit) {
                 div.parentElement.removeChild(div);        
@@ -361,7 +360,7 @@ function nomPrenomVilleControl(nomForm, prenomForm, villeForm) {
 
 //////////////////////////////////////////////////// PAGE CONFIRMATION ////////////////////////////////////////////////////
 export function affichageConfirmationCommande () {
-    let orderResume = JSON.parse(localStorage.getItem("order"));
+    let orderResume = storage.load("order");
     let nameResumeHTML = document.querySelector('#name');
     let numberOfProductResumeHTML = document.querySelector('#nbr_produit');
     let orderIdHTML = document.querySelector('#order_id');
@@ -369,16 +368,19 @@ export function affichageConfirmationCommande () {
     numberOfProductResumeHTML.innerHTML = orderResume[0].orderLength;
     orderIdHTML.innerHTML = orderResume[0].orderId;
     setTimeout(function(){
-        localStorage.removeItem('order');
+        storage.remove('order');
     },500)
 };
 //
 //////////////////////////////////////////////// STORAGE
-// let storage = {
-//     save : function (key) {
-//         localStorage.setItem(key);
-//     }
-//     load : function (key) {
-//         localStorage.getItem(key)
-//     }
-// }
+let storage = {
+    load : function (key) {
+        return JSON.parse(localStorage.getItem(key))
+    },
+    save : function (key, value) {
+        return localStorage.setItem(key, JSON.stringify(value))
+    },
+    remove : function (key) {
+        return localStorage.removeItem(key);
+    }
+}
