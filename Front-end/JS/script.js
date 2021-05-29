@@ -126,14 +126,15 @@ export function pageProduit (response) {
                 }
                 // Verif si id et option du produit sont deja présent, si oui, on change la quantité
                 let isProductInCart = false;
+                // TODO Sortir la fonction 
                 function checkProdInCart () {
-                    for (let i of productInCart) {
-                        if (product.id === i.id && product.option === i.option) {
+                    for (let currentProduct of productInCart) {
+                        if (product.id === currentProduct.id && product.option === currentProduct.option) {
                             isProductInCart = true;
                             let qtyOfProductInCart;
-                            qtyOfProductInCart = i.qty;
-                            i.qty = Number(qtyOfProductInCart) + Number(inputQty.value);
-                            i.prix = response.price * i.qty;
+                            qtyOfProductInCart = currentProduct.qty;
+                            currentProduct.qty = Number(qtyOfProductInCart) + Number(inputQty.value);
+                            currentProduct.prix = response.price * currentProduct.qty;
                             // Anim validation d'ajout
                             confirmAddCart.classList.remove('hidden');
                             confirmAddCart.classList.add('anim_add_cart_ok');
