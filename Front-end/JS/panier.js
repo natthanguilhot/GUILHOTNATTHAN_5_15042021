@@ -1,4 +1,4 @@
-import {formulaireCommande, affichageProdPanier, totalProductInCart} from './script.js';
+import {formulaireCommande, affichageProdPanier, totalProductInCart, storage} from './script.js';
 
 totalProductInCart();
 
@@ -7,7 +7,7 @@ fetch("http://localhost:3000/api/cameras")
 .then(response => response.json()
 .then(response => {
     let productInCart = [];
-    productInCart = JSON.parse(localStorage.getItem('produit'));
+    productInCart = storage.load('produit');
 
     affichageProdPanier(response, productInCart);
     
