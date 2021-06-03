@@ -236,6 +236,7 @@ function sendOrder () {
         })
         .then(response => response.json())
         .then(response => {
+            console.log(response);
             let order = []; // on créé un tableau order
             let orderResume = { // on créé un objet order résumé
                 orderLength : response.products.length,
