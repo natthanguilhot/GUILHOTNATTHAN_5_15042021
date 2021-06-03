@@ -26,30 +26,30 @@ function prixConvert (prixamodifer) {
 // Affichage produits page index
 export function affichageProduitsIndex (response) {
     for(let product of response) {
-        let carteProd = document.querySelector('#carte');
+        let carteProd = document.querySelector('#carte');// Récupération du parent et du template
         let noeudParent = document.querySelector('#noeud_parent');
 
-        let newCarteProd = carteProd.cloneNode(true);
+        let newCarteProd = carteProd.cloneNode(true); // clonage et traitement
         noeudParent.appendChild(newCarteProd);
         newCarteProd.removeAttribute('id');
         newCarteProd.classList.remove('hidden');
 
-        let imgProduct = newCarteProd.querySelector('img');
+        let imgProduct = newCarteProd.querySelector('img');// Selection du DOM
         let nomProdct = newCarteProd.querySelector('.nom_produit');
         let descriptionProduct = newCarteProd.querySelector('.description_produit');
         let prixProduct = newCarteProd.querySelector('.prix_produit');
 
-        let price = prixConvert(product.price);
+        let price = prixConvert(product.price); // Affichage dans le DOM
         imgProduct.setAttribute('src', product.imageUrl);
         nomProdct.innerHTML = product.name;
         descriptionProduct.innerHTML = product.description;
         prixProduct.innerHTML = price;
 
-        const url = new URL(baseUrl + 'product.html');
-        url.searchParams.append('id', product._id);
+        const url = new URL(baseUrl + 'product.html'); 
+        url.searchParams.append('id', product._id);// On vient ajouter dans l'url le paramètre id avec l'id du produit donné par l'API
 
         let lienProduct = newCarteProd.querySelector('.lien');
-        lienProduct.setAttribute('href',url);
+        lienProduct.setAttribute('href',url); // On intègre se lien au bouton
     }
 };
 //
