@@ -341,7 +341,7 @@ function nomPrenomVilleControl(nomForm, prenomForm, villeForm) {
     if(/^[A-Za-z\s]{2,20}$/.test(nomForm) && /^[A-Za-z]{2,20}$/.test(prenomForm) && /^[A-Za-z]{2,20}$/.test(villeForm)) {
      return true;
     }else {
-     alert("Les champs Nom, Prénom et Ville ne doivent contenir que des lettres, pas d'espace inutile et pas de caractères spécieaux(&,-,(),§,! ..).")
+     alert("Les champs Nom, Prénom et Ville ne doivent contenir que des lettres (minimum 2), pas d'espace inutile et pas de caractères spécieaux(&,-,(),§,! ..).")
      return false;
     }
  };
@@ -367,21 +367,21 @@ function nomPrenomVilleControl(nomForm, prenomForm, villeForm) {
 
 //////////////////////////////////////////////////// PAGE CONFIRMATION ////////////////////////////////////////////////////
 export function affichageConfirmationCommande () {
-    let orderResume = storage.load("order");
+    let orderResume = storage.load("order"); // On récupère les données de la commande (prénom, id et nombre de produits)
     let nameResumeHTML = document.querySelector('#name');
     let numberOfProductResumeHTML = document.querySelector('#nbr_produit');
     let orderIdHTML = document.querySelector('#order_id');
 
-    nameResumeHTML.innerHTML = orderResume[0].prenom;
+    nameResumeHTML.innerHTML = orderResume[0].prenom; // On affiche ces données
     numberOfProductResumeHTML.innerHTML = orderResume[0].orderLength;
     orderIdHTML.innerHTML = orderResume[0].orderId;
 
-    setTimeout(function(){
+    setTimeout(function(){ // On supprime les données
         storage.remove('order');
     },500)
 };
 //
-//////////////////////////////////////////////// STORAGE
+//////////////////////////////////////////////// STORAGE ////////////////////////////////////////////////////
 export let storage = {
     load : function (key) {
         return JSON.parse(localStorage.getItem(key))
