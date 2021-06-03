@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="JS/index.js" defer></script>
-    <script src="JS/script.js" defer></script>
+    <script type="module" src="JS/index.js"></script>
 
     <link rel="stylesheet" type="text/css" href="./CSS/style.css">
     <!-- <link rel="icon" href="favicon.ico" /> -->
@@ -45,8 +44,8 @@
         </div>
     </header>
 
-    <section id="bg-hb" class="lg:h-96 h-40 ">
-    </section>
+    <div id="bg-hb" class="lg:h-96 h-40 ">
+    </div>
 
     <main class="max-w-screen-xl lg:w-10/12 flex flex-col justify-center items-center m-auto">
         <h2 class="text-3xl p-4 underline">Nos produits</h2>
@@ -64,7 +63,7 @@
 
             <div id="carte" class="flex flex-col md:flex-row w-11/12 m-auto md:h-60 my-8 carte hidden hover:shadow-lg">
                 <div class="lg:w-6/12 w-full h-80 md:h-auto xl:w-4/12 p-2 bg-black">
-                    <img class="h-full w-full photo_produit" alt="Photo du produit" src="">
+                    <img class="h-full w-full photo_produit object-cover object-center" alt="Photo du produit" src="">
                 </div>
                 <div class="flex flex-col w-full lg:w-6/12 xl:w-8/12 relative h-60 bg-white">
                     <p class="p-2 m-2 nom_produit"></p>

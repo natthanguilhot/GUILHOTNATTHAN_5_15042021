@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../JS/script.js" defer></script>
-    <script src="../JS/panier.js" defer></script>
-    <!-- TODO Regardez les modules JS pour mettre qu'un script -->
+    <script src="../JS/panier.js" type="module"></script>
 
     <link rel="stylesheet" type="text/css" href="../CSS/style.css">
     <!-- <link rel="icon" href="favicon.ico" /> -->
@@ -51,9 +49,9 @@
         <h2 class="text-2xl underline p-4">Votre panier <i class="fas fa-shopping-basket lg:text-2xl underline"></i></h2>
 
         <div id="liste_produits_panier" class="w-11/12 h-auto max-w-screen-lg">
-            <div id="template_carte_produit_panier" class="flex m-4 border shadow-md rounded bg-gray-100 hidden">
+            <div id="template_carte_produit_panier" class="flex m-4 border shadow-md rounded bg-gray-100 hidden produit">
                 <div class="p-2 bg-black md:h-32 md:w-4/12 lg:h-60 w-5/12">
-                    <img class="w-full h-full bg-white img_produit" alt="Photo du produit" src="">
+                    <img class="w-full h-full bg-white img_produit object-cover object-center" alt="Photo du produit" src="">
                 </div>
                 <div class="w-7/12 md:w-8/12 px-2 py-2 flex flex-col justify-between items-start">
                     <p>Appareil : <span class="nom_produit"></span></p>
@@ -93,7 +91,7 @@
                     </div>
                     <div class="flex my-2">
                         <label for="adresse" class="w-4/12">Adresse :</label>
-                        <input type="text/number" name="adresse" minlength="5" maxlength="50" required id="adresse" class="w-8/12 h-8 text-black p-1 transition-colors focus:bg-red-600 focus:text-white border border-black">
+                        <input type="text" name="adresse" required id="adresse" class="w-8/12 h-8 text-black p-1 transition-colors focus:bg-red-600 focus:text-white border border-black">
                     </div>
                     <div class="flex my-2">
                         <label for="city" class="w-4/12">Ville :</label>
